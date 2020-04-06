@@ -7,4 +7,4 @@ Instructions to package and run this test can be found [here.](https://aws.amazo
 I have converted the project in gradle file and we can use ./gradlew cucumber to run cucumber tests
 ## License
 
-This library is licensed under the Apache 2.0 License. 
+This library is licensed under the Apache 2.0 License.
