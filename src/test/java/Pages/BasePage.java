@@ -16,6 +16,7 @@
 package Pages;
 
 
+import cucumber.api.java.Before;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
     private static final int KEYBOARD_ANIMATION_DELAY = 1000;
     private static final int XML_REFRESH_DELAY = 1000;
+
 
     /**
      * The driver
@@ -81,4 +83,7 @@ public abstract class BasePage {
 
         return element.getText().contains(input);
     }
+
+
+
 }

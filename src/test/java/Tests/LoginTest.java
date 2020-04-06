@@ -14,16 +14,17 @@
  */
 
 package Tests;
-
+import Tests.AbstractBaseTests.TestRunnerClass;
 import cucumber.api.CucumberOptions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-
 import Pages.LoginPage;
-import Tests.AbstractBaseTests.TestBase;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
+import org.testng.TestRunner;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -33,13 +34,7 @@ import org.testng.annotations.Test;
  */
 
 
-@CucumberOptions(
-        strict = true,
-        monochrome = true,
-        features = "classpath:LoginTest",
-        plugin = {"pretty"}
-)
-public class LoginTest extends TestBase {
+public class LoginTest {
     private static final String LOGIN_SUCCESS_MESSAGE = "You are logged on as admin";
     private static final String LOGIN_FAIL_MESSAGE = "You gave me the wrong username and password";
     private static final String CORRECT_USER_NAME = "admin";
@@ -47,20 +42,21 @@ public class LoginTest extends TestBase {
     private static final String FAIL_USER_NAME = "Wrong User";
     private static final String FAIL_PASSWORD = "12345";
     private static final String BAD_TEXT_ENTRY_MSG = "Username sent to text field incorrectly";
+    TestRunnerClass testRunnerClass = new TestRunnerClass();
 
     private LoginPage loginPage;
 
-    @Override
-    public String getName() {
-        return "Login Page";
-    }
+//    public String getName() {
+//        return "Login Page";
+//    }
 
     /**
      * Creates a login
      */
     @Given("^I navigate to the login page$")
     public void setUpPage() {
-        loginPage = new LoginPage(driver);
+        System.out.println(TestRunnerClass.driver);
+        loginPage = new LoginPage(TestRunnerClass.driver);
     }
 
     /**
@@ -78,7 +74,13 @@ public class LoginTest extends TestBase {
     @Given("^username is bad$")
     public void loginFail() throws InterruptedException {
         Assert.assertTrue(loginPage.login(FAIL_USER_NAME, FAIL_PASSWORD));
-        Assert.assertEquals(loginPage.getMessage(), LOGIN_FAIL_MESSAGE);
+        try{
+            Thread.sleep(3000);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       Assert.assertEquals(loginPage.getMessage(), LOGIN_FAIL_MESSAGE);
     }
 
     /**
@@ -87,6 +89,12 @@ public class LoginTest extends TestBase {
     @Then("^log out$")
     public void logOut() {
         loginPage.pressAltButton();
+        try{
+            Thread.sleep(3000);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
         Assert.assertTrue(loginPage.checkIfBackAtLogin());
     }
 }

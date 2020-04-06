@@ -15,6 +15,7 @@
 
 package Pages;
 
+import cucumber.api.java.Before;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -24,6 +25,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
  */
 public class LoginPage extends BasePage {
     private static final int KEYBOARD_ANIMATION_DELAY = 1000;
+
 
     /**
      * The login button
@@ -72,7 +74,7 @@ public class LoginPage extends BasePage {
      * @return the login message
      */
     public String getMessage() {
-        return driver.findElementById("Alt Message").getText();
+        return driver.findElementById("com.amazonaws.devicefarm.android.referenceapp:id/login_alt_message_textView").getText();
     }
 
     /**
@@ -88,6 +90,8 @@ public class LoginPage extends BasePage {
      * Presses the logout/try again button
      */
     public void pressAltButton() {
-        driver.findElementById("Alt Button").click();
+        driver.findElementById("com.amazonaws.devicefarm.android.referenceapp:id/alt_button").click();
     }
+
+
 }
